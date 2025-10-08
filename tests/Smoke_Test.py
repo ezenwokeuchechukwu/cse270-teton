@@ -7,18 +7,15 @@ from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.firefox.options import Options
-from selenium.webdriver.firefox.service import Service
-from webdriver_manager.firefox import GeckoDriverManager
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.chrome.options import Options
 
 class TestSmokeSuite():
     def setup_method(self, method):
         options = Options()
-        options.headless = True  # headless mode for GitHub Actions
-        self.driver = webdriver.Firefox(
-            service=Service(GeckoDriverManager().install()),
-            options=options
-        )
+        options.add_argument("--headless=new")
+        self.driver = webdriver.Chrome(options=options)
         self.vars = {}
 
     def teardown_method(self, method):
